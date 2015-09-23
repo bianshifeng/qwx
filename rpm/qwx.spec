@@ -20,7 +20,7 @@
 
 Name:           qwx
 Summary:        WeChat for linux
-Version:        0.1
+Version:        0.6
 Release:        1
 License:        GPL-3.0
 Url:            https://github.com/xiangzhai/qwx
