@@ -25,3 +25,10 @@ function monitorNewMsg()
     if (typeof(chatView) != 'undefined' && typeof(chatView.doNewMsg) == 'function')
         chatView.doNewMsg();
 }
+
+
+var styles={
+	navbar: {
+		horizontalMargin:12
+	}
+}
