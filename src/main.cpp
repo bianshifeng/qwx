@@ -37,6 +37,10 @@ int main(int argc, char* argv[])
 
     app.setApplicationName(CODE_NAME);
     app.setApplicationVersion(APPLICATION_VERSION);
+    // TODO: session management testcase
+    // http://marc.info/?l=kde-core-devel&m=144832700109449
+    // KDE-BUG 341930
+    app.setQuitOnLastWindowClosed(false);
 
     I18N i18n(TRANSLATIONS_PATH, APPLICATION_ENCODING);
     i18n.translate();
