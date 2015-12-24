@@ -77,12 +77,12 @@ void Sync::finished(QNetworkReply* reply)
     }
 #endif
     QJsonDocument doc = QJsonDocument::fromJson(replyStr.toUtf8());                
-    if (!doc.isObject()) { emit error(); return; }                                 
+    if (!doc.isObject()) { Q_EMIT error(); return; }                                 
     QJsonObject obj = doc.object();
     m_syncKey.clear();
-    foreach (const QJsonValue & val, obj["SyncKey"].toObject()["List"].toArray()) {
+    Q_FOREACH (const QJsonValue & val, obj["SyncKey"].toObject()["List"].toArray()) {
         m_syncKey.append(QString::number(val.toObject()["Key"].toInt()) + "|" + 
                 QString::number(val.toObject()["Val"].toInt()));
     }                                                                              
-    emit syncKeyChanged();
+    Q_EMIT syncKeyChanged();
 }

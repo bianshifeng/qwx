@@ -37,5 +37,5 @@ void IpCity::finished(QNetworkReply* reply)
 #if QWX_DEBUG
     qDebug() << "DEBUG:" << __PRETTY_FUNCTION__ << city;
 #endif
-    emit cityChanged(city);
+    Q_EMIT cityChanged(city);
 }

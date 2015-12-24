@@ -50,7 +50,7 @@ void Process::setProgram(const QString &program)
     qDebug() << "DEBUG:" << __PRETTY_FUNCTION__ << program;
 #endif
     d->program = program;
-    emit programChanged(d->program);
+    Q_EMIT programChanged(d->program);
 }
 
 const QStringList &Process::arguments() const
@@ -65,7 +65,7 @@ void Process::setArguments(const QStringList &arguments)
     qDebug() << "DEBUG:" << __PRETTY_FUNCTION__ << arguments;
 #endif
     d->arguments = arguments;
-    emit argumentsChanged(d->arguments);
+    Q_EMIT argumentsChanged(d->arguments);
 }
 
 const QString &Process::dir() const { return d->dir; }
@@ -75,7 +75,7 @@ void Process::setDir(const QString &dir)
     if (dir == d->dir) return;
     d->dir = dir;
     d->setWorkingDirectory(d->dir);
-    emit dirChanged();
+    Q_EMIT dirChanged();
 }
 
 void Process::start()

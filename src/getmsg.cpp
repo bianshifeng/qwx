@@ -31,7 +31,7 @@ void GetMsg::setFromUserName(const QString & fromUserName)
 {
     if (m_fromUserName != fromUserName) {
         m_fromUserName = fromUserName;
-        emit fromUserNameChanged();
+        Q_EMIT fromUserNameChanged();
     }
 }
 
@@ -39,7 +39,7 @@ void GetMsg::setToUserName(const QString & toUserName)
 {
     if (m_toUserName != toUserName) {
         m_toUserName = toUserName;
-        emit toUserNameChanged();
+        Q_EMIT toUserNameChanged();
     }
 }
 
@@ -47,7 +47,7 @@ void GetMsg::setNeedSaveLog(bool needSaveLog)
 {
     if (m_needSaveLog != needSaveLog) {
         m_needSaveLog = needSaveLog;
-        emit needSaveLogChanged();
+        Q_EMIT needSaveLogChanged();
     }
 }
 
@@ -129,12 +129,12 @@ void GetMsg::finished(QNetworkReply* reply)
     qDebug() << "DEBUG:" << replyStr;
 #endif
     QJsonDocument doc = QJsonDocument::fromJson(replyStr.toUtf8());
-    if (!doc.isObject()) { emit error(); return; }
+    if (!doc.isObject()) { Q_EMIT error(); return; }
     QJsonObject obj = doc.object();
     if (obj["AddMsgCount"].toInt() == 0)
-        emit noNewMsg();
+        Q_EMIT noNewMsg();
 
-    foreach (const QJsonValue & val, obj["AddMsgList"].toArray()) {
+    Q_FOREACH (const QJsonValue & val, obj["AddMsgList"].toArray()) {
         QJsonObject msg = val.toObject();
         QString fromUserNameStr = msg["FromUserName"].toString();
         QString toUserNameStr = msg["ToUserName"].toString();
@@ -148,13 +148,13 @@ void GetMsg::finished(QNetworkReply* reply)
             if (m_needSaveLog)
                 m_saveLog(createTimeStr, fromUserNameStr, content);
 
-            emit newMsg(content, fromUserNameStr, toUserNameStr);
+            Q_EMIT newMsg(content, fromUserNameStr, toUserNameStr);
         }
         
         if ((fromUserNameStr == m_fromUserName && toUserNameStr == m_toUserName) || 
             (fromUserNameStr == m_toUserName && toUserNameStr == m_fromUserName)) {
             if (!m_map.contains(fromUserNameStr + toUserNameStr + createTimeStr)) {
-                emit received(content, fromUserNameStr);
+                Q_EMIT received(content, fromUserNameStr);
             }
         }
 
@@ -168,10 +168,9 @@ void GetMsg::finished(QNetworkReply* reply)
     }
     
     m_syncKey.clear();
-    foreach (const QJsonValue & val, 
-             obj["SyncKey"].toObject()["List"].toArray()) {
+    Q_FOREACH (const QJsonValue & val, obj["SyncKey"].toObject()["List"].toArray()) {
         m_syncKey.append(QString::number(val.toObject()["Key"].toInt()) + "|" + 
                 QString::number(val.toObject()["Val"].toInt()));
     }
-    emit syncKeyChanged();
+    Q_EMIT syncKeyChanged();
 }

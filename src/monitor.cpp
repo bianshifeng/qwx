@@ -84,10 +84,10 @@ void Monitor::finished(QNetworkReply* reply)
     }
 #endif
     if (replyStr != "window.synccheck={retcode:\"0\",selector:\"0\"}") {
-        emit newMsg();
+        Q_EMIT newMsg();
         return;
     } else {
-        emit noNewMsg();
+        Q_EMIT noNewMsg();
         return;
     }
 }

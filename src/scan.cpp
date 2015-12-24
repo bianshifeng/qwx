@@ -42,11 +42,11 @@ void Scan::finished(QNetworkReply* reply)
     qDebug() << "DEBUG:" << replyStr;
 #endif
     if (replyStr == "window.code=408;") {
-        emit error("timeout");
+        Q_EMIT error("timeout");
         return;
     }
     if (replyStr == "window.code=201;") {
-        emit scanedButWaitConfirm();
+        Q_EMIT scanedButWaitConfirm();
         return;
     }
     if (replyStr.contains("window.code=200;")) {
@@ -54,14 +54,14 @@ void Scan::finished(QNetworkReply* reply)
         if (index == -1) {
             qWarning() << "ERROR:" << __PRETTY_FUNCTION__ << 
                 "redirect_uri not found!";
-            emit scanedAndConfirmed(redirect_uriStr);
+            Q_EMIT scanedAndConfirmed(redirect_uriStr);
             return;
         }
         redirect_uriStr = replyStr.mid(index, replyStr.size() - index - 2);
 #if QWX_DEBUG
         qDebug() << "DEBUG:" << __PRETTY_FUNCTION__ << redirect_uriStr;
 #endif
-        emit scanedAndConfirmed(redirect_uriStr);
+        Q_EMIT scanedAndConfirmed(redirect_uriStr);
         return; 
     }
 }

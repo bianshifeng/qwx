@@ -26,15 +26,15 @@ public:
 
     QString userName() const { return m_userName; }
     void setUserName(const QString & userName) 
-    { m_userName = userName; emit userNameChanged(); }
+    { m_userName = userName; Q_EMIT userNameChanged(); }
 
     QString nickName() const { return m_nickName; }
     void setNickName(const QString & nickName) 
-    { m_nickName = nickName; emit nickNameChanged(); }
+    { m_nickName = nickName; Q_EMIT nickNameChanged(); }
 
     QString headImgUrl() const { return m_headImgUrl; }
     void setHeadImgUrl(const QString & headImgUrl) 
-    { m_headImgUrl = headImgUrl; emit headImgUrlChanged(); }
+    { m_headImgUrl = headImgUrl; Q_EMIT headImgUrlChanged(); }
 
 Q_SIGNALS:
     void userNameChanged();

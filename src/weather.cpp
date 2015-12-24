@@ -61,7 +61,7 @@ void Weather::finished(QNetworkReply* reply)
 #if QWX_DEBUG
     qDebug() << "DEBUG:" << __PRETTY_FUNCTION__ << curTempStr;
 #endif
-    emit weatherChanged(m_city + "，PM 2.5：" + pm25Str + "，" + curTempStr + 
+    Q_EMIT weatherChanged(m_city + "，PM 2.5：" + pm25Str + "，" + curTempStr + 
             "，" + weather["weather"].toString() + "，" + 
             weather["wind"].toString() + "，" + weather["temperature"].toString());
 }

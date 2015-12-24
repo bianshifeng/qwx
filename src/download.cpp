@@ -50,7 +50,7 @@ void Download::get(QString url, QString filePath)
     m_downloadProgressConnection = connect(m_reply, &QNetworkReply::downloadProgress, 
             [this](qint64 bytesReceived, qint64 bytesTotal) {
                 if (bytesTotal)
-                    emit downloaded(bytesReceived / bytesTotal);
+                    Q_EMIT downloaded(bytesReceived / bytesTotal);
             });
     m_readyReadConnection = connect(m_reply, &QNetworkReply::readyRead, 
             [this] {
@@ -59,7 +59,7 @@ void Download::get(QString url, QString filePath)
             });
     m_finishConnection = connect(&m_nam, &QNetworkAccessManager::finished, 
             [this] {
-                emit finished();
+                Q_EMIT finished();
                 disconnect(m_downloadProgressConnection);
                 disconnect(m_readyReadConnection);
                 disconnect(m_sslErrorConnection);

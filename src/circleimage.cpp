@@ -18,7 +18,7 @@ void CircleImage::setColor(const QColor & color)
 {
     if (m_color != color) {
         m_color = color;
-        emit colorChanged();
+        Q_EMIT colorChanged();
         update();
     }
 }
@@ -32,7 +32,7 @@ void CircleImage::setImageSource(const QString & imageSource)
             m_imageSource.replace("qrc:/qml", ":");
         else if (m_imageSource.contains("file://")) 
             m_imageSource.replace("file://", "");
-        emit imageSourceChanged();
+        Q_EMIT imageSourceChanged();
         update();
     }
 }
