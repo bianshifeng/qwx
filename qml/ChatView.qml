@@ -293,13 +293,14 @@ Rectangle {
 					sendMsgObj.sendV2(Global.uin, Global.sid, Global.skey,
 									  Global.deviceId, chatView.fromUserName,
 									  chatView.toUserList[i].userName,
-									  sendMsgTextField.text, Global.syncKey)
+									  sendMsgTextField.text, Global.syncKey);
 				} else {
 					sendMsgObj.send(Global.uin, Global.sid, Global.skey,
 									Global.deviceId, chatView.fromUserName,
 									chatView.toUserList[i].userName,
-									sendMsgTextField.text, Global.syncKey)
-				}
+									sendMsgTextField.text, Global.syncKey);
+                }
+                sleep(3000);
 			}
 		}
 		chatListModel.append({
