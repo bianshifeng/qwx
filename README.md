@@ -25,6 +25,18 @@ make
 ./qwx
 ```
 
+Build for Ubuntu 15.04+
+
+```
+sudo apt-get install qtdeclarative5-dev qt5-default qt5-qmake qml-module-qtquick-controls qtdeclarative5-controls-plugin
+
+mkdir build
+cd build
+qtchooser -run-tool=qmake -qt=qt5 ..
+make
+./qwx
+
+```
 
 ## i18n
 

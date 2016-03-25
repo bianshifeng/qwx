@@ -50,6 +50,6 @@ void CircleImage::paint(QPainter* painter)
     painter->setRenderHints(QPainter::SmoothPixmapTransform);
 	painter->setClipping(true);
 	painter->setClipPath(path);
-	painter->drawImage(0, 0, image.scaled(width(), height()));
+	painter->drawImage(0, 0, image.scaled(width(), height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 	painter->clipPath();
 }
