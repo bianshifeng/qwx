@@ -141,8 +141,15 @@ void GetMsg::finished(QNetworkReply* reply)
         QString createTimeStr = QString::number(msg["CreateTime"].toInt());
         QString content = msg["Content"] .toString();
        
-        if (content.contains("msg"))
-            continue;
+        if (content.contains("msg")) {
+            if (content.contains("img")) {
+                content = tr("Please view the photo on your phone");
+            } else if (content.contains("appmsg")) {
+                content = tr("Please view the App message on your phone");
+            } else {
+                continue;
+            }
+        }
 
         if (!m_map.contains(fromUserNameStr + toUserNameStr + createTimeStr)) {
             if (m_needSaveLog)

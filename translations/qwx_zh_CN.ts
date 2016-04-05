@@ -24,6 +24,17 @@
     </message>
 </context>
 <context>
+    <name>GetMsg</name>
+    <message>
+        <source>Please view the photo on your phone</source>
+        <translation type="unfinished">请在您手机上浏览照片</translation>
+    </message>
+    <message>
+        <source>Please view the App message on your phone</source>
+        <translation type="unfinished">请在您手机上查看App信息</translation>
+    </message>
+</context>
+<context>
     <name>LoginView</name>
     <message>
         <source>WeChat</source>
@@ -43,7 +54,7 @@
     </message>
     <message>
         <source>Please confirm on your mobile</source>
-        <translation type="unfinished">请在你的手机上确认</translation>
+        <translation type="unfinished">请在您的手机上确认</translation>
     </message>
     <message>
         <source>Confirmed then waiting for login</source>
@@ -54,7 +65,7 @@
     <name>NavigatorView</name>
     <message>
         <source>energy saving and emission reduction</source>
-        <translation type="unfinished">节能减排</translation>
+        <translation type="obsolete">节能减排</translation>
     </message>
     <message>
         <source>WeChat Qt frontend</source>
@@ -71,6 +82,10 @@
     <message>
         <source>Me</source>
         <translation type="unfinished">我</translation>
+    </message>
+    <message>
+        <source>Weather report</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

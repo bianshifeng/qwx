@@ -30,6 +30,6 @@ make
 ## i18n
 
 ```
-lupdate qml/*.qml -ts translations/qwx_zh_CN.ts
+lupdate src/*.cpp qml/*.qml -ts translations/qwx_zh_CN.ts
 lrelease translations/qwx_zh_CN.ts
 ```
