@@ -15,7 +15,7 @@ const QString LOGIN_SERVER_HOST = "https://login.weixin.qq.com";
 const QString WX_SERVER_HOST = "https://wx.qq.com";
 const QString WX_V2_SERVER_HOST = "https://wx2.qq.com";
 const QString WX_CGI_PATH = "/cgi-bin/mmwebwx-bin/";
-const QString XIAODOUBI_URL = "http://www.xiaodoubi.com/bot/api.php?chat=";
+const QString XIAODOUBI_URL = "http://api.douqq.com/?key=Vml5Z0pFZGk9UHg2a2dPY0loZW49S3cxN3dVQUFBPT0&msg=";
 const QString QWXDIR = QDir::homePath() + "/." + CODE_NAME;
 const QString COOKIE_FILENAME = ".cookie";
 const QString DELIM = ";|";

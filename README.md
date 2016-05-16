@@ -33,3 +33,6 @@ make
 lupdate src/*.cpp qml/*.qml -ts translations/qwx_zh_CN.ts
 lrelease translations/qwx_zh_CN.ts
 ```
+
+## 小逗比机器人
+聊天状态下输入***小逗比出来***即可换出[聊天机器人](http://www.xiaodoubi.com/)
