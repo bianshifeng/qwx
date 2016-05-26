@@ -46,14 +46,14 @@ public:
     void setUserName(const QString & userName) 
     {
         m_userName = userName;
-        emit userNameChanged();
+        Q_EMIT userNameChanged();
     }
 
     QString content() const { return m_content; }
     void setContent(const QString & content) 
     {
         m_content = content;
-        emit contentChanged();
+        Q_EMIT contentChanged();
     }
 
 Q_SIGNALS:

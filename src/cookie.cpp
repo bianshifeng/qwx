@@ -66,7 +66,7 @@ void Cookie::finished(QNetworkReply* reply)
     }
     QTextStream out(&file);
     QLocale locale = QLocale(QLocale::C, QLocale::AnyCountry);
-    foreach (const QNetworkCookie cookie, HttpGet::cookies()) {
+    Q_FOREACH (const QNetworkCookie cookie, HttpGet::cookies()) {
         if (HttpGet::cookies().size() > 1) {
             out << QString(cookie.name()) << "=" << QString(cookie.value()) 
                 << "; expires=" << locale.toString(cookie.expirationDate(), 
@@ -97,9 +97,10 @@ void Cookie::finished(QNetworkReply* reply)
             qWarning() << "V2 still use XML format for cookie?";
             return;
         } else {
-            emit switchToV2();
+            Q_EMIT switchToV2();
         }
-    } else 
-        emit infoChanged(uinStr, sidStr, ticketStr);
+    } else { 
+        Q_EMIT infoChanged(uinStr, sidStr, ticketStr);
+    }
     file.close();
 }

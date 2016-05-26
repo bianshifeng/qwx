@@ -18,7 +18,7 @@ void CircleImage::setColor(const QColor & color)
 {
     if (m_color != color) {
         m_color = color;
-        emit colorChanged();
+        Q_EMIT colorChanged();
         update();
     }
 }
@@ -32,7 +32,7 @@ void CircleImage::setImageSource(const QString & imageSource)
             m_imageSource.replace("qrc:/qml", ":");
         else if (m_imageSource.contains("file://")) 
             m_imageSource.replace("file://", "");
-        emit imageSourceChanged();
+        Q_EMIT imageSourceChanged();
         update();
     }
 }
@@ -44,11 +44,12 @@ void CircleImage::paint(QPainter* painter)
         return;
     QImage image(m_imageSource);
     if (image.isNull()) return;
-    QPainterPath path;
-    path.addRect(0, 0, width(), height());
+	QPainterPath path;
     path.addEllipse(0, 0, width(), height());
     painter->setRenderHints(QPainter::Antialiasing);
     painter->setRenderHints(QPainter::SmoothPixmapTransform);
-    painter->drawImage(0, 0, image.scaled(width(), height()));
-    painter->fillPath(path, QBrush(m_color));
+	painter->setClipping(true);
+	painter->setClipPath(path);
+	painter->drawImage(0, 0, image.scaled(width(), height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+	painter->clipPath();
 }

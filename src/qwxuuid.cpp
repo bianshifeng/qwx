@@ -47,7 +47,7 @@ void QwxUUID::finished(QNetworkReply* reply)
     index = replyStr.indexOf(qruuidStr) + qruuidStr.size();
     if (index == -1) {
         qWarning() << "ERROR:" << __PRETTY_FUNCTION__ << "uuid not found!";
-        emit error();
+        Q_EMIT error();
         return;
     }
     uuidStr = replyStr.mid(index, replyStr.size() - index - QString("\";").size());
@@ -55,8 +55,8 @@ void QwxUUID::finished(QNetworkReply* reply)
     qDebug() << "DEBUG:" << __PRETTY_FUNCTION__ << uuidStr;
 #endif
     if (uuidStr == "") {
-        emit error();
+        Q_EMIT error();
         return;
     }
-    emit uuidChanged(uuidStr);
+    Q_EMIT uuidChanged(uuidStr);
 }

@@ -30,10 +30,10 @@ Contact::~Contact()
 
 void Contact::m_clear() 
 { 
-    foreach (QObject* obj, m_contactList) {
+    Q_FOREACH (QObject* obj, m_contactList) {
         if (obj) {
             delete obj;
-            obj = nullptr;
+            obj = Q_NULLPTR;
         }
     }
     m_contactList.clear(); 
@@ -70,18 +70,18 @@ void Contact::finished(QNetworkReply* reply)
     }                                                                              
 #endif
     QJsonDocument doc = QJsonDocument::fromJson(replyStr.toUtf8());                
-    if (!doc.isObject()) { emit error(); return; }                                 
+    if (!doc.isObject()) { Q_EMIT error(); return; }                                 
     QJsonObject obj = doc.object();                                                
     QJsonArray arr = obj["MemberList"].toArray();                              
     m_contactList.append(new UserObject("groupsend", tr("Group Send"), ""));
-    foreach (const QJsonValue & val, arr) {                                        
+    Q_FOREACH (const QJsonValue & val, arr) {
         QJsonObject user = val.toObject();                                         
         m_contactList.append(new UserObject(user["UserName"].toString(), 
                    user["NickName"].toString(), 
                    m_v2 ? WX_V2_SERVER_HOST + user["HeadImgUrl"].toString() : 
                         WX_SERVER_HOST + user["HeadImgUrl"].toString()));
     }                                                                              
-    emit contactListChanged();
+    Q_EMIT contactListChanged();
 }
 
 QString Contact::getNickName(QString userName) 

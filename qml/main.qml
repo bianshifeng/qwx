@@ -7,12 +7,13 @@ import cn.com.isoft.qwx 1.0
 
 ApplicationWindow {
     id: rootWindow
-    width: 320; height: 544
+	width: 480; height: 822
     title: qsTr("WeChat Qt frontend")
 
     StackView {
         id: rootWindowStackView
         anchors.fill: parent
-        initialItem: SplashView {}
+		initialItem: SplashView {}
+//		initialItem: ChatView {}
     }
 }

@@ -19,10 +19,10 @@ ChatLog::~ChatLog()
 #if QWX_DEBUG
     qDebug() << "DEBUG:" << __PRETTY_FUNCTION__;
 #endif
-    foreach (QObject* obj, m_chatLogList) {
+    Q_FOREACH (QObject* obj, m_chatLogList) {
         if (obj) {
             delete obj;
-            obj = nullptr;
+            obj = Q_NULLPTR;
         }
     }
     m_chatLogList.clear();
@@ -49,5 +49,5 @@ void ChatLog::load(QString toUserName)
         }
         file.close();
     }
-    emit chatLogListChanged();
+    Q_EMIT chatLogListChanged();
 }

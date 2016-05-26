@@ -37,6 +37,11 @@ int main(int argc, char* argv[])
 
     app.setApplicationName(CODE_NAME);
     app.setApplicationVersion(APPLICATION_VERSION);
+    // TODO: session management testcase
+    // http://marc.info/?l=kde-core-devel&m=144832700109449
+    // KDEBUG-341930
+    // perhaps we need to wait Qt5.9.x to fix it ;-)
+    //app.setQuitOnLastWindowClosed(false);
 
     I18N i18n(TRANSLATIONS_PATH, APPLICATION_ENCODING);
     i18n.translate();

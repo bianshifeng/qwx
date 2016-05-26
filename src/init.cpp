@@ -23,7 +23,7 @@ Init::Init(HttpPost* parent)
     std::mt19937 eng(time(NULL));
     std::uniform_int_distribution<long long> deviceId(1615250492, 519062714508114);
     m_deviceId = QString::number(deviceId(eng));
-    emit deviceIdChanged();
+    Q_EMIT deviceIdChanged();
 }
 
 Init::~Init() 
@@ -36,8 +36,11 @@ Init::~Init()
 
 void Init::m_clear() 
 {
-    foreach (QObject* obj, m_contactList) {
-        if (obj) delete obj; obj = nullptr;
+    Q_FOREACH (QObject* obj, m_contactList) {
+        if (obj) {
+            delete obj;
+            obj = Q_NULLPTR;
+        }
     }
     m_contactList.clear();
     m_map.clear();
@@ -99,7 +102,10 @@ void Init::finished(QNetworkReply* reply)
 #endif
 
     QJsonDocument doc = QJsonDocument::fromJson(replyStr.toUtf8());                
-    if (!doc.isObject()) { emit error(); return; }                                 
+    if (!doc.isObject()) {
+        Q_EMIT error();
+        return;
+    }
     QJsonObject obj = doc.object();
     QJsonObject user = obj["User"].toObject();
     m_loginUserName = user["UserName"].toString();
@@ -107,10 +113,10 @@ void Init::finished(QNetworkReply* reply)
 #if QWX_DEBUG
     qDebug() << "DEBUG:" << __PRETTY_FUNCTION__ << m_loginUserName;
 #endif
-    emit loginUserNameChanged();
-    emit loginHeadImgUrlChanged();
+    Q_EMIT loginUserNameChanged();
+    Q_EMIT loginHeadImgUrlChanged();
 
-    foreach (const QJsonValue & val, obj["ContactList"].toArray()) {
+    Q_FOREACH (const QJsonValue & val, obj["ContactList"].toArray()) {
         QJsonObject user = val.toObject();
         QString userName = user["UserName"].toString();
         QString nickName = user["NickName"].toString();
@@ -122,16 +128,16 @@ void Init::finished(QNetworkReply* reply)
         }
         m_map.insert(userName, nickName);
     }
-    emit contactListChanged();
+    Q_EMIT contactListChanged();
 
     QString skey = obj["SKey"].toString();                                         
 #if QWX_DEBUG                                                                      
     qDebug() << "DEBUG:" << __PRETTY_FUNCTION__ << skey;                           
 #endif 
     QStringList syncKey;
-    foreach (const QJsonValue & val, obj["SyncKey"].toObject()["List"].toArray()) {
+    Q_FOREACH (const QJsonValue & val, obj["SyncKey"].toObject()["List"].toArray()) {
         syncKey.append(QString::number(val.toObject()["Key"].toInt()) + "|" + 
                 QString::number(val.toObject()["Val"].toInt()));
     }
-    emit skeyChanged(skey, syncKey);
+    Q_EMIT skeyChanged(skey, syncKey);
 }

@@ -32,5 +32,5 @@ void XiaoDouBi::get(QString word)
 
 void XiaoDouBi::finished(QNetworkReply* reply) 
 {
-    emit contentChanged(QString(reply->readAll()));
+    Q_EMIT contentChanged(QString(reply->readAll()));
 }

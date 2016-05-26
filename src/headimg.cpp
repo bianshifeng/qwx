@@ -29,21 +29,21 @@ void HeadImg::setV2(bool v2)
 {
     if (m_v2 != v2) {
         m_v2 = v2;
-        emit v2Changed();
+        Q_EMIT v2Changed();
     }
 }
 
 void HeadImg::setUserName(const QString & userName) 
 {
     m_userName = userName;
-    emit userNameChanged();
+    Q_EMIT userNameChanged();
     m_v2 ? m_get(WX_V2_SERVER_HOST) : m_get(WX_SERVER_HOST);
 }
 
 void HeadImg::setHeadImgUrl(const QString & headImgUrl) 
 {
     m_headImgUrl = headImgUrl;
-    emit headImgUrlChanged();
+    Q_EMIT headImgUrlChanged();
     m_v2 ? m_get(WX_V2_SERVER_HOST) : m_get(WX_SERVER_HOST);
 }
 
@@ -58,13 +58,13 @@ void HeadImg::m_get(QString host)
     QString headImgPath = QWXDIR + "/" + m_userName;
     if (QFile::exists(headImgPath)) { 
         m_filePath = "file://" + QWXDIR + "/" + m_userName;
-        emit filePathChanged();
+        Q_EMIT filePathChanged();
     } else {
         m_downLoad.get(url, headImgPath);
         m_connection = connect(&m_downLoad, &Download::finished, [this] {
                     disconnect(m_connection);
                     m_filePath = "file://" + QWXDIR + "/" + m_userName;
-                    emit filePathChanged();
+                    Q_EMIT filePathChanged();
                 });
     }
 }
